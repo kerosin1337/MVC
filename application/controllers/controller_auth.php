@@ -25,7 +25,7 @@ class Controller_Auth extends Controller
                     }
                 } else {
                     if (!isset($q)) {
-                        $this->view->generate('login_view.php', 'template_view.php', null);
+                        header('Location:' . $this->host);
                     } else {
                         $this->view->generate('login_view.php', 'template_view.php', $q);
                     }
