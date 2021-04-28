@@ -2,25 +2,11 @@
 
 class Model_Services extends Model
 {
-    private function get_user_service($id)
-    {
-        $user_model = new Model_User();
-        $link = $this->db();
-        $query = 'SELECT * FROM user_services WHERE services_id = ' . $id;
-        $result = mysqli_query($link, $query) or die("Ошибка " . mysqli_error($link));
-        $arr = [];
-        foreach ($result as $item) {
-            $arr[] = array(
-                'user' => $user_model->get_current_user($item['user_id'])
-            );
-        }
-        mysqli_close($link);
-        return $arr;
-    }
-
+    // функция для получения данных
     public function get_data()
     {
         $link = $this->db();
+        $user_model = new Model_User();
         $query = 'SELECT * FROM services';
         $result = mysqli_query($link, $query) or die("Ошибка " . mysqli_error($link));
         $arr = [];
@@ -30,13 +16,14 @@ class Model_Services extends Model
                 'title' => $item['title'],
                 'body' => $item['body'],
                 'image' => $item['image'],
-                'enrolled' => $this->get_user_service($item['id'])
+                'enrolled' => $user_model->get_user_service($item['id'])
             );
         }
         mysqli_close($link);
         return $arr;
     }
 
+    // функция для выбора услуги
     public function get_choice($post, $id)
     {
         $link = $this->db();
@@ -44,6 +31,7 @@ class Model_Services extends Model
         mysqli_query($link, $query) or die($query . mysqli_error($link));
     }
 
+    // функция для добавления услуги
     public function get_add($post, $image)
     {
         $link = $this->db();
@@ -58,6 +46,7 @@ class Model_Services extends Model
         mysqli_close($link);
     }
 
+    // функция для реадктирования услуги
     public function get_edit($post, $image)
     {
         $link = $this->db();
@@ -72,6 +61,7 @@ class Model_Services extends Model
         mysqli_close($link);
     }
 
+    // функция для удаления услуги
     public function get_delete($post)
     {
         $link = $this->db();

@@ -2,6 +2,7 @@
 
 class Model_User extends Model
 {
+    // функция для получения данных
     public function get_data()
     {
         $link = $this->db();
@@ -22,6 +23,7 @@ class Model_User extends Model
         return $arr;
     }
 
+    // функция для получения конкретного пользователя по id
     public function get_current_user($id)
     {
         $link = $this->db();
@@ -31,6 +33,7 @@ class Model_User extends Model
         return mysqli_fetch_assoc($result);
     }
 
+    // функция для авторизации
     public function get_data_login($post, $user_ip)
     {
         $link = $this->db();
@@ -101,6 +104,7 @@ class Model_User extends Model
         }
     }
 
+    // функция для регистрации
     public function get_data_reg($post)
     {
         $link = $this->db();
@@ -134,14 +138,7 @@ class Model_User extends Model
         }
     }
 
-    public function get_data_id($id)
-    {
-        $link = $this->db();
-        $query = mysqli_query($link, "SELECT *,INET_NTOA(user_ip) AS user_ip FROM users WHERE user_id = '" . intval($id) . "' LIMIT 1");
-        mysqli_close($link);
-        return mysqli_fetch_assoc($query);
-    }
-
+    // функция для добавления пользователя админом
     public function get_add($post)
     {
         $link = $this->db();
@@ -154,6 +151,7 @@ class Model_User extends Model
         mysqli_close($link);
     }
 
+    // функция для редактирования пользователя админом
     public function get_edit($post)
     {
         $link = $this->db();
@@ -173,11 +171,28 @@ class Model_User extends Model
         mysqli_close($link);
     }
 
+    // функция для удаления пользователя админом
     public function get_delete($post)
     {
         $link = $this->db();
         $query = "DELETE FROM users WHERE user_id = " . $post['delID'];
         mysqli_query($link, $query) or die("Ошибка " . mysqli_error($link));
         mysqli_close($link);
+    }
+
+    // функция для получения пользователей которые записались на определнную услугу
+    public function get_user_service($id)
+    {
+        $link = $this->db();
+        $query = 'SELECT * FROM user_services WHERE services_id = ' . $id;
+        $result = mysqli_query($link, $query) or die("Ошибка " . mysqli_error($link));
+        $arr = [];
+        foreach ($result as $item) {
+            $arr[] = array(
+                'user' => $this->get_current_user($item['user_id'])
+            );
+        }
+        mysqli_close($link);
+        return $arr;
     }
 }

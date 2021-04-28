@@ -2,9 +2,9 @@
 
 class Model_News extends Model
 {
+    // функция получения данных
     public function get_data()
     {
-
         $model_user = new Model_User();
         $model_comments = new Model_Comments();
         $link = $this->db();
@@ -25,6 +25,7 @@ class Model_News extends Model
         return $arr;
     }
 
+    // функция для добавления новости()
     public function get_add($post, $image, $user_id)
     {
         $link = $this->db();
@@ -39,7 +40,8 @@ class Model_News extends Model
         mysqli_close($link);
     }
 
-    public function get_edit($post, $image, $user_id)
+    // функция для редактирования новости
+    public function get_edit($post, $image)
     {
         $link = $this->db();
         if ($image) {
@@ -53,6 +55,7 @@ class Model_News extends Model
         mysqli_close($link);
     }
 
+    // функция для удаления новости
     public function get_delete($post)
     {
         $link = $this->db();

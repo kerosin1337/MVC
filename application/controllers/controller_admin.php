@@ -4,6 +4,7 @@ require_once 'application/models/model_portfolio.php';
 
 class Controller_Admin extends Controller
 {
+    // функция для создания экземпляров
     function __construct()
     {
         $this->model = array(
@@ -17,12 +18,11 @@ class Controller_Admin extends Controller
         $this->host = 'http://' . $_SERVER['HTTP_HOST'] . '/';;
     }
 
+    // страница админа
     function action_index()
     {
-
-        $userdata = $this->model['users']->get_data_id($_SESSION['id']);
-
-        if ($userdata['is_superuser'] == '1') {
+        $userdata = $this->model['users']->get_current_user($_SESSION['id']);
+        if ($userdata['is_superuser'] == '1') { // проверка на админа
             $data = array(
                 'portfolio' => $this->model['portfolio']->get_data(),
                 'users' => $this->model['users']->get_data(),
@@ -36,6 +36,7 @@ class Controller_Admin extends Controller
         }
     }
 
+    // функция для добавления портфолио
     function action_add_port()
     {
         if ($_POST) {
@@ -44,6 +45,7 @@ class Controller_Admin extends Controller
         }
     }
 
+    // функция для редактирования портфолоио
     function action_edit_port()
     {
         if ($_POST) {
@@ -52,6 +54,7 @@ class Controller_Admin extends Controller
         }
     }
 
+    // функция для удаляения портфолио
     function action_delete_port()
     {
         if ($_POST) {
@@ -60,7 +63,7 @@ class Controller_Admin extends Controller
         }
     }
 
-
+    // функция для добавления новости
     function action_add_news()
     {
         if ($_POST) {
@@ -69,6 +72,7 @@ class Controller_Admin extends Controller
         }
     }
 
+    // функция для редактирования новостей
     function action_edit_news()
     {
         if ($_POST) {
@@ -77,6 +81,7 @@ class Controller_Admin extends Controller
         }
     }
 
+    // функция для удаляения новостей
     function action_delete_news()
     {
         if ($_POST) {
@@ -85,6 +90,7 @@ class Controller_Admin extends Controller
         }
     }
 
+    // функция для удаляения комментария
     function action_delete_comment()
     {
         if ($_POST) {
@@ -93,6 +99,7 @@ class Controller_Admin extends Controller
         }
     }
 
+    // функция для добавления услуги
     function action_add_services()
     {
         if ($_POST) {
@@ -101,6 +108,7 @@ class Controller_Admin extends Controller
         }
     }
 
+    // функция для редактирования услуги
     function action_edit_services()
     {
         if ($_POST) {
@@ -109,6 +117,7 @@ class Controller_Admin extends Controller
         }
     }
 
+    // функция для удаляения услуги
     function action_delete_services()
     {
         if ($_POST) {
@@ -117,6 +126,7 @@ class Controller_Admin extends Controller
         }
     }
 
+    // функция для добавления пользователя
     function action_add_user()
     {
         if ($_POST) {
@@ -125,6 +135,7 @@ class Controller_Admin extends Controller
         }
     }
 
+    // функция для редактирования пользователя
     function action_edit_user()
     {
         if ($_POST) {
@@ -133,6 +144,7 @@ class Controller_Admin extends Controller
         }
     }
 
+    // функция для удаления пользователя
     function action_delete_user()
     {
         if ($_POST) {

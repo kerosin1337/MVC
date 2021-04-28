@@ -16,7 +16,6 @@ class Route
 
         if ($routes[1] == 'portfolio' || $routes[1] == 'contacts') {
             $controller_name = 'Main';
-            $content_view = $routes[1];
             $action_name = $routes[1];
         }
         $model_name = 'Model_' . $controller_name;

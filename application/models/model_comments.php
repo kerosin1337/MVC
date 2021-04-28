@@ -2,6 +2,7 @@
 
 class Model_Comments extends Model
 {
+    // функция для получения данных по id
     public function get_data_by_id($new_id)
     {
         $model_user = new Model_User();
@@ -22,6 +23,7 @@ class Model_Comments extends Model
         return $arr;
     }
 
+    // функция для добавления комментария
     public function get_add_comment($post)
     {
         $link = $this->db();
@@ -30,14 +32,7 @@ class Model_Comments extends Model
         mysqli_close($link);
     }
 
-//    public function get_delete_by_id($post, $id)
-//    {
-//        $link = $this->db();
-//        $query = 'DELETE FROM comments WHERE id = ' . $post['commID'] . ' AND user_id = ' . $id;
-//        mysqli_query($link, $query) or die($query . mysqli_error($link));
-//        mysqli_close($link);
-//    }
-
+    // функция для удаления комменатрия для пользователи и для админа
     public function get_delete_by_id($post, $user_id, $admin)
     {
         $link = $this->db();

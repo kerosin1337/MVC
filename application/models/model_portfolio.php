@@ -2,7 +2,7 @@
 
 class Model_Portfolio extends Model
 {
-
+    // получения данных
     public function get_data()
     {
         $link = $this->db();
@@ -22,6 +22,7 @@ class Model_Portfolio extends Model
         return $arr;
     }
 
+    // функция для добавления портфолио
     public function get_add($post)
     {
         $link = $this->db();
@@ -30,6 +31,7 @@ class Model_Portfolio extends Model
         mysqli_close($link);
     }
 
+    // функция для редакирования портфолио
     public function get_edit($post)
     {
         $link = $this->db();
@@ -38,6 +40,7 @@ class Model_Portfolio extends Model
         mysqli_close($link);
     }
 
+    // функция для удаления портфолио
     public function get_delete($post)
     {
         $link = $this->db();

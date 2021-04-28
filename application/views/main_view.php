@@ -30,15 +30,13 @@
                             <div class="accordion-body border">
                                 <div class="d-flex">
                                     <?= $comm['body'] ?>
-<!--                                    --><?php //if (isset($_SESSION['id'])): ?>
-                                        <?php if (isset($_SESSION['id']) and $comm['user_id'] == $_SESSION['id']): ?>
-                                            <form action="/main/delete_comment/" method="post"
-                                                  class="d-flex ms-auto">
-                                                <input type="hidden" name="commID" value="<?= $comm['id'] ?>">
-                                                <button class="btn btn-close" type="submit"></button>
-                                            </form>
-                                        <?php endif; ?>
-<!--                                    --><?php //endif; ?>
+                                    <?php if ((isset($_SESSION['id']) and $comm['user_id'] == $_SESSION['id']) or $_SESSION['is_superuser']): ?>
+                                        <form action="/main/delete_comment/" method="post"
+                                              class="d-flex ms-auto">
+                                            <input type="hidden" name="commID" value="<?= $comm['id'] ?>">
+                                            <button class="btn btn-close" type="submit"></button>
+                                        </form>
+                                    <?php endif; ?>
                                 </div>
 
                                 <div>
